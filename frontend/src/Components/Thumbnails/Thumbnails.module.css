@@ -1,0 +1,70 @@
+.main_container{
+  max-width: 1100px;
+  margin: 5px auto;
+  overflow: hidden;
+  /* justify-content: center;   */
+  /* text-align: center; */
+  padding: 0 2rem;
+}
+
+
+
+
+.main_container div a{
+  height: 20.7rem;
+  width: 18rem;
+  border: 1px solid whitesmoke;
+  border-radius: 1rem;
+  margin: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  color: black;;
+}
+
+.image{
+  object-fit: cover;
+  height: 12.5rem;
+}
+
+.content{
+  margin-top: 0.3rem;
+  padding: 0.5rem 1rem;
+  position: relative;
+  height: 5rem;
+}
+
+.favourite{
+  position: absolute;
+  top: 0.5rem;
+  right: 1rem;
+  font-size: 1.2rem;
+}
+
+.not{
+  color: grey;
+}
+
+.stars{
+  margin: 0.5rem 0;
+}
+
+.grocery_item_footer{
+  display: flex;
+  justify-content: space-between;
+}
+
+.stock{
+  border-radius: 2rem;
+  background: whitesmoke;
+  padding: 0 0.5rem;
+  color: grey;
+  margin-top: 0.2rem;
+}
+
+.price{
+  background-color: white;
+  color: #008AD1;
+  margin-top: 0.5rem;
+  font-size: 1.1rem;
+}
