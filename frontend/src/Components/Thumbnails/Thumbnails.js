@@ -41,8 +41,7 @@ function TheCarousel ({market}){
 
     return (
         <Carousel responsive={responsive}>
-                {
-                            
+                {    
                             theGoods.map(goods => 
                         
                             <div key={goods.id}>
@@ -61,17 +60,12 @@ function TheCarousel ({market}){
                                         <div className={classes.grocery_item_footer}>
                                             <div className={classes.price}>{<Price price={goods.price}/>}</div>
                                             <div className={classes.stock}>{goods.stock}</div>
-                                        </div>
-                                        
+                                        </div>   
                                     </div>
-                            
                                 </Link>
-                            </div>
-                        
+                            </div>         
                         )
                     }
-                
-
                 </Carousel>
 
     )
@@ -82,7 +76,6 @@ function TheCarousel ({market}){
             <div>
                     <HeaderText marketName={'Main Land Market'} />
                     <TheCarousel market={'Mainland'} />
-
                     <HeaderText marketName={'Island Market'} />
                     <TheCarousel market={'Island'} />
 

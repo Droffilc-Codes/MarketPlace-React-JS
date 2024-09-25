@@ -83,4 +83,46 @@ export const sample_market_data = [
         stock: 100,
         otherInformation: "5kg at 15000, 100 5kg bags in stock"
     },
+    {
+        id: '7',
+        location:'Mainland',
+        market: 'Yaba',
+        shop: 'Iya Gbemisola',
+        name: 'Tomatoes',
+        favourite: false,
+        stars: 3.5,
+        imageUrl: 'grocery-1.jpg',
+        tags: ['grocery', 'Tomtoes', 'Yaba'],
+        price: 455,
+        stock: 500,
+        otherInformation: "0.5kg at 500, 500kg in stock"
+    },
+    {
+        id: '8',
+        location:'Mainland',
+        market: 'Mile 12',
+        shop: 'Iya Subomi',
+        name: 'Tomatoes',
+        favourite: true,
+        stars: 4,
+        imageUrl: 'grocery-2.jpg',
+        tags: ['grocery', 'Tomtoes', 'Mile 12'],
+        price: 570,
+        stock: 2000,
+        otherInformation: "0.5kg at 500, 2000kg in stock"
+    },
+    {
+        id: '9',
+        location:'Mainland',
+        market: 'Oyingbo',
+        shop: 'Iya Shola',
+        name: 'Onions',
+        favourite: false,
+        stars: 3,
+        imageUrl: 'grocery-3.jpg',
+        tags: ['grocery', 'Pepper', 'Mile 12'],
+        price: 280,
+        stock: 1000,
+        otherInformation: "0.5kg at 245, 1000kg in stock"
+    },
 ]
