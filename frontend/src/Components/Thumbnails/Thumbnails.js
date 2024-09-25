@@ -35,18 +35,15 @@ function HeaderText({marketName}){
     return ( <h3 className={classes.market_title}>{marketName}</h3>)
 }
 
+function TheCarousel ({market}){
 
+    const theGoods = groceries.filter(item => item.location === market)
 
-  return  ( 
-        <div className={classes.main_container}>
-            <div>
-                <h4> Hope it works Lorem ipsum dolor sit amet consectetur adipisicing elit. Minima, ad?</h4>
-                <h4> Hope it works Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos cum perspiciatis quam ipsum natus labore sit fugiat ab sequi unde.</h4>
-                    <HeaderText marketName={'Main Land Market'} />
-
-                <Carousel responsive={responsive}>
+    return (
+        <Carousel responsive={responsive}>
                 {
-                            groceries.map(goods => 
+                            
+                            theGoods.map(goods => 
                         
                             <div key={goods.id}>
                                 <Link to={`/goods/${goods.id}`}>
@@ -77,6 +74,17 @@ function HeaderText({marketName}){
 
                 </Carousel>
 
+    )
+}
+
+  return  ( 
+        <div className={classes.main_container}>
+            <div>
+                    <HeaderText marketName={'Main Land Market'} />
+                    <TheCarousel market={'Mainland'} />
+
+                    <HeaderText marketName={'Island Market'} />
+                    <TheCarousel market={'Island'} />
 
             </div>
 
