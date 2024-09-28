@@ -8,7 +8,7 @@ export const sample_market_data = [
         favourite: false,
         stars: 4,
         imageUrl: 'grocery-1.jpg',
-        tags: ['grocery', 'Tomtoes', 'Yaba'],
+        tags: ['grocery', 'Tomatoes', 'Yaba'],
         price: 500,
         stock: 1000,
         otherInformation: "0.5kg at 500, 1000kg in stock"
@@ -22,7 +22,7 @@ export const sample_market_data = [
         favourite: true,
         stars: 4.5,
         imageUrl: 'grocery-2.jpg',
-        tags: ['grocery', 'Tomtoes', 'Mile 12'],
+        tags: ['grocery', 'Tomatoes', 'Mile 12'],
         price: 550,
         stock: 2000,
         otherInformation: "0.5kg at 500, 2000kg in stock"
@@ -32,11 +32,11 @@ export const sample_market_data = [
         location:'Mainland',
         market: 'Oyingbo',
         shop: 'Iya Ola',
-        name: 'Pepper',
+        name: 'Onions',
         favourite: false,
         stars: 3.5,
         imageUrl: 'grocery-3.jpg',
-        tags: ['grocery', 'Pepper', 'Mile 12'],
+        tags: ['grocery', 'Onions', 'Ata', 'Mile 12'],
         price: 250,
         stock: 2000,
         otherInformation: "0.5kg at 245, 2000kg in stock"
@@ -50,7 +50,7 @@ export const sample_market_data = [
         favourite: false,
         stars: 4.5,
         imageUrl: 'grocery-4.jpg',
-        tags: ['grocery', 'Onions', 'Ajah'],
+        tags: ['grocery', 'Onions', 'Ajah' ],
         price: 100,
         stock: 2500,
         otherInformation: "0.5kg at 100, 2500kg in stock"
@@ -92,7 +92,7 @@ export const sample_market_data = [
         favourite: false,
         stars: 3.5,
         imageUrl: 'grocery-1.jpg',
-        tags: ['grocery', 'Tomtoes', 'Yaba'],
+        tags: ['grocery', 'Tomatoes', 'Yaba'],
         price: 455,
         stock: 500,
         otherInformation: "0.5kg at 500, 500kg in stock"
@@ -106,7 +106,7 @@ export const sample_market_data = [
         favourite: true,
         stars: 4,
         imageUrl: 'grocery-2.jpg',
-        tags: ['grocery', 'Tomtoes', 'Mile 12'],
+        tags: ['grocery', 'Tomatoes', 'Mile 12'],
         price: 570,
         stock: 2000,
         otherInformation: "0.5kg at 500, 2000kg in stock"
@@ -125,4 +125,16 @@ export const sample_market_data = [
         stock: 1000,
         otherInformation: "0.5kg at 245, 1000kg in stock"
     },
+]
+
+export const sample_market_tags = [
+    {name: 'grocery', count:9},
+    {name: 'Tomatoes', count:4},
+    {name: 'Yaba', count:2},
+    {name: 'Mile 12', count:4},
+    {name: 'Pepper', count:1},
+    {name: 'Onions', count:2},
+    {name: 'Ajah', count:2},
+    {name: 'Garri', count:2},
+    {name: 'Epe', count:1},
 ]

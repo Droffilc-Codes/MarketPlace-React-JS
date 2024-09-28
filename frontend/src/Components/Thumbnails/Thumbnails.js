@@ -45,7 +45,7 @@ function TheCarousel ({market}){
                             theGoods.map(goods => 
                         
                             <div key={goods.id}>
-                                <Link to={`/goods/${goods.id}`}>
+                                <Link to={`/grocery/${goods.id}`}>
                                 <img className={classes.image} src={`/Grocery/${goods.imageUrl}`} alt={goods.name} />
                                     <div className={classes.content}>
                                     
@@ -78,7 +78,6 @@ function TheCarousel ({market}){
                     <TheCarousel market={'Mainland'} />
                     <HeaderText marketName={'Island Market'} />
                     <TheCarousel market={'Island'} />
-
             </div>
 
         </div>

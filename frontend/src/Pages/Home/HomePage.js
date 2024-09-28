@@ -1,11 +1,14 @@
 import React, { useEffect, useReducer } from 'react'
-import { getAll, search } from '../../Services/groceryServices'
+import { getAll, getAllGroceriesByTag, getAllTags, search } from '../../Services/groceryServices'
 import Thumbnails from '../../Components/Thumbnails/Thumbnails'
 import { useParams } from 'react-router-dom'
 import Search from '../../Components/Search/Search'
+import Tags from '../../Components/Tags/Tags'
+// import { type } from '@testing-library/user-event/dist/type'
 
 const initialState = {
-  groceries: []
+  groceries: [],
+  tags: []
 }
 
 const reducer = (state, action) => {
@@ -15,6 +18,11 @@ const reducer = (state, action) => {
         ...state,
         groceries: action.payload
       }
+      case 'TAGS_LOADED':
+        return {
+          ...state,
+          tags: action.payload
+        }
     default:
       return state
   }
@@ -23,21 +31,24 @@ const reducer = (state, action) => {
 
 export default function HomePage() {
   const [state, dispatch] = useReducer(reducer, initialState)
-  const {groceries} = state
-  const {searchTerm} = useParams()
+  const {groceries, tags} = state
+  const {searchTerm, tag} = useParams()
 
   // console.log(state)
   useEffect(()=>{
 
-    const loadGroceries = searchTerm ? search(searchTerm) : getAll()
+    getAllTags().then(tags => dispatch({type: 'TAGS_LOADED', payload: tags}))
+
+    const loadGroceries = tag? getAllGroceriesByTag(tag) : searchTerm ? search(searchTerm) : getAll()
 
     loadGroceries.then(groceryStuffs => dispatch({type: 'GROCERIES LOADED', payload: groceryStuffs }))
 
-  }, [searchTerm])
+  }, [searchTerm, tag])
 
   return   <div> 
     
     <Search />
+    <Tags tags={tags} />
     <Thumbnails groceries={groceries} />
   
   </div>
