@@ -1,14 +1,22 @@
 import React, { useEffect, useState } from 'react'
 import classes from './GroceryPage.module.css'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { getGroceryById } from '../../Services/groceryServices'
 import StarRating from '../Rating/StarRating'
 import Tags from '../Tags/Tags'
 import Price from '../Price/Price'
+import { useBag } from '../../Hook/useBag/useBag'
 
 export default function GroceryPage() {
     const [grocery, setGrocery] = useState(null)
     const {id} = useParams()
+    const { addToBag } = useBag()
+    const navigate = useNavigate()
+
+    const handleAddToBag = ()=>{
+        addToBag(grocery)
+        navigate('/bag')
+    }
 
 
     useEffect(()=>{
@@ -44,7 +52,7 @@ export default function GroceryPage() {
                 {grocery.stock}
             </div>
 
-            <button>Add to Bag</button>
+            <button onClick={handleAddToBag}>Add to Bag</button>
 
         </div>
       </div> }
