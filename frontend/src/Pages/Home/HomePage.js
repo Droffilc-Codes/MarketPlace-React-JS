@@ -4,6 +4,7 @@ import Thumbnails from '../../Components/Thumbnails/Thumbnails'
 import { useParams } from 'react-router-dom'
 import Search from '../../Components/Search/Search'
 import Tags from '../../Components/Tags/Tags'
+import NotFound from '../../Components/Not Found/NotFound'
 // import { type } from '@testing-library/user-event/dist/type'
 
 const initialState = {
@@ -49,6 +50,7 @@ export default function HomePage() {
     
     <Search />
     <Tags tags={tags} />
+    {groceries.length === 0 && <NotFound linkText='Reset Search' />}
     <Thumbnails groceries={groceries} />
   
   </div>

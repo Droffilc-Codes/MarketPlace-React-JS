@@ -4,6 +4,7 @@ import classes from './BagPage.module.css'
 import Title from '../../Components/Title/Title'
 import { Link } from 'react-router-dom'
 import Price from '../../Components/Price/Price'
+import NotFound from '../../Components/Not Found/NotFound'
 
 export default function BagPage() {
 
@@ -12,7 +13,7 @@ export default function BagPage() {
   return   <>
   <Title title="Your Bag" margin="1.5rem 0 0 2.5rem" />
 
-    {bag && bag.items.length > 0 &&
+    {bag && bag.items.length === 0 ? (<NotFound message='Your Shopping Bag is empty!' />) : (
 
         <div className={classes.container}>
 
@@ -31,7 +32,6 @@ export default function BagPage() {
                         </div>
 
                         <div>
-                            {/* <input value={item.quantity} onChange={e=> changeQuantity(item, Number(e.target.value))}/> */}
                             <input value={item.quantity} onChange={e => changedQuantity(item, Number(e.target.value))} />
                         </div>
 
@@ -63,6 +63,8 @@ export default function BagPage() {
             </div>
 
         </div>
+    )
+    
     }
 
   </>

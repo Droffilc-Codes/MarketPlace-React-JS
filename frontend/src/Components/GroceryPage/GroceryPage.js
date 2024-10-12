@@ -6,6 +6,7 @@ import StarRating from '../Rating/StarRating'
 import Tags from '../Tags/Tags'
 import Price from '../Price/Price'
 import { useBag } from '../../Hook/useBag/useBag'
+import NotFound from '../Not Found/NotFound'
 
 export default function GroceryPage() {
     const [grocery, setGrocery] = useState(null)
@@ -24,7 +25,7 @@ export default function GroceryPage() {
     },[id])
 
   return  <>
-      {grocery &&  <div className={classes.container}>
+      {!grocery ? (<NotFound message='Grocery Item Not Found!' linkText='Back to Home Page' /> ) : ( <div className={classes.container}>
         <img className={classes.image} 
             src={`/Grocery/${grocery.imageUrl}`} alt={grocery.name}
         />
@@ -55,7 +56,7 @@ export default function GroceryPage() {
             <button onClick={handleAddToBag}>Add to Bag</button>
 
         </div>
-      </div> }
+      </div>)}
     </>
   
 }

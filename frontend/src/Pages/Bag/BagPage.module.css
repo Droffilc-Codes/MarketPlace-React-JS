@@ -37,6 +37,10 @@
     object-fit: cover;
  }
 
+ .list li img:hover {
+  opacity: 0.8;
+ }
+ 
 .list li div {
     padding: 1rem;
 }
