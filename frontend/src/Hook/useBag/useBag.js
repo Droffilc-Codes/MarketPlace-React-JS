@@ -1,5 +1,7 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { sample_market_data } from '../../data'
+// import { sample_market_data } from '../../../../backend/src/data'
+import { getAll } from '../../Services/groceryServices'
+
 
 const BagContext = createContext(null)
 
@@ -15,13 +17,11 @@ const EMPTY_BAG = {
 export default function BagProvider({children}) {
     const initBag = getBagFromLocalStorage()
 
-    // const [bagItems, setBagItems] = useState(Array.isArray(initBag.items) ? initBag.items : [])
-
     const [bagItems, setBagItems] = useState(initBag.items)
    
     const [totalPrice, setTotalPrice] = useState(initBag.totalPrice)
     const [totalCount, setTotalCount] = useState(initBag.totalCount)
-    const [stock, setStock] = useState(sample_market_data.map(item=>item.stock))
+    const [stock, setStock] = useState()
 
 
     useEffect(()=>{
@@ -30,6 +30,11 @@ export default function BagProvider({children}) {
         
         setTotalPrice(totalPrice)
         setTotalCount(totalCount)
+
+        //Try
+        getAll().then(groceryItem => setStock(groceryItem.stock))
+        //end Try
+
 
         localStorage.setItem(BAG_KEY, JSON.stringify({items:bagItems, totalPrice, totalCount, stock /* reove stock*/}))
 
@@ -92,10 +97,17 @@ export default function BagProvider({children}) {
         }
     }
 
+    const clearBag = ()=>{
+        localStorage.removeItem(BAG_KEY)
+        const { items, totalPrice, totalCount } = EMPTY_BAG
+        setBagItems(items)
+        setTotalPrice(totalPrice)
+        setTotalCount(totalCount)
+    }
 
+// Reduce Item inStock - should be done
 
-
-  return <BagContext.Provider value={{bag:{items:bagItems, totalPrice, totalCount, stock}, removeFromBag, changedQuantity, addToBag}}>
+  return <BagContext.Provider value={{bag:{items:bagItems, totalPrice, totalCount, stock}, removeFromBag, changedQuantity, addToBag, clearBag}}>
     {children}
     </BagContext.Provider>
 }

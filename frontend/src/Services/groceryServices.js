@@ -1,14 +1,39 @@
-import { sample_market_data, sample_market_tags } from "../data";
+import axios from 'axios'
 
-export const getAll = async () => sample_market_data
+export const getAll = async () => {
+    const { data } = await axios.get('/api/groceries') //check this later for the link address
+    return data
+}
 
-export const search = async searchTerm => sample_market_data.filter(item => item.name.toLowerCase().includes(searchTerm.toLowerCase()))
+export const search = async searchTerm => {
+    const { data } = await axios.get('api/groceries/search/' + searchTerm)
+    return data
+}
 
-export const getAllTags = async () => sample_market_tags
+export const getAllTags = async () => {
+    const { data } = await axios.get('api/groceries/tags')
+     return data
+}
 
 export const getAllGroceriesByTag = async tags => {
     if(tags === 'grocery') getAll()
-        return sample_market_data.filter(items => items.tags?.includes(tags))
+        const { data } = await axios.get('api/groceries/tags/' + tags)
+        return data
     }
 
-export const getGroceryById = async groceryId => sample_market_data.find(item => item.id === groceryId)
+export const getGroceryById = async groceryId => {
+    const { data } = await axios.get('api/groceries/' + groceryId)
+    return data
+}
+
+// Test Oct 17
+export const stockUpdateResponse  = async orders => {
+    try {
+        // const { data } = await axios.put('/api/groceries/changestock', { items: orders })
+        const { data } = await axios.put('/api/groceries/changestock', orders )
+        return data;
+    } catch (error) {
+        console.error("Error updating stock:", error);
+        throw error;
+    }
+};

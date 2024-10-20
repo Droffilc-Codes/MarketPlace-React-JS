@@ -5,14 +5,30 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import BagProvider from './Hook/useBag/useBag';
+import './axiosConfig'
+import { AuthProvider } from './Hook/useAuth';
+import { Toaster } from 'react-hot-toast';
+import { LoadingProvider } from './Hook/useLoading';
+import './Components/Interceptors/AuthInterceptor'
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-    <BagProvider>
-     <App />
-    </BagProvider>
+      <LoadingProvider>
+          <AuthProvider>
+            <BagProvider>
+            <App />
+            <Toaster  // KEep your eyes on it
+              position="top-center"
+              reverseOrder={false}
+              gutter={8}
+              containerClassName=""
+              containerStyle={{}}
+            />
+            </BagProvider>
+          </AuthProvider>
+        </LoadingProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

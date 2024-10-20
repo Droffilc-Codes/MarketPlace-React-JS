@@ -138,3 +138,25 @@ export const sample_market_tags = [
     {name: 'Garri', count:2},
     {name: 'Epe', count:1},
 ]
+
+
+export const sample_market_users = [
+    {
+        id: 1,
+        name: "Ada Umeh",
+        email: "ada@gmail.com",
+        password: "12345",
+        phone: "08101336792",
+        address: "Lagos, Ikeja",
+        isAdmin: true,
+    },
+    {
+        id: 2,
+        name: "Leo David",
+        email: "leo@gmail.com",
+        password: "12345",
+        phone: "08101336792",
+        address: "Lagos, Ikeja",
+        isAdmin: false,
+    },
+]

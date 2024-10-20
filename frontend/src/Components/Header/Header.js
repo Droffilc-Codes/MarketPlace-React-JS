@@ -2,14 +2,12 @@ import React from 'react'
 import classes from './Header.module.css'
 import { Link } from 'react-router-dom'
 import { useBag } from '../../Hook/useBag/useBag'
+import { useAuth } from '../../Hook/useAuth'
 
 export default function Header() {
 
-    const user = {
-      name: "Ada"
-    }
+    const { user, logout } = useAuth()
 
-    const logout = () => {}
 
 
     const {bag} = useBag()

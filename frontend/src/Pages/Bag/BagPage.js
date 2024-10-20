@@ -23,7 +23,7 @@ export default function BagPage() {
                     <li key={item.grocery.id}>
                         <div>
                             <img
-                              src={`/Grocery/${item.grocery.imageUrl}`}
+                              src={`${item.grocery.imageUrl}`}
                               alt={item.grocery.name}
                               />
                         </div>

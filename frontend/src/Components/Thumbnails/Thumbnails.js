@@ -46,7 +46,7 @@ function TheCarousel ({market}){
                         
                             <div key={goods.id}>
                                 <Link to={`/grocery/${goods.id}`}>
-                                <img className={classes.image} src={`/Grocery/${goods.imageUrl}`} alt={goods.name} />
+                                <img className={classes.image} src={`${goods.imageUrl}`} alt={goods.name} /> 
                                     <div className={classes.content}>
                                     
                                         <div className={classes.name}>{goods.name}</div>

@@ -27,7 +27,7 @@ export default function GroceryPage() {
   return  <>
       {!grocery ? (<NotFound message='Grocery Item Not Found!' linkText='Back to Home Page' /> ) : ( <div className={classes.container}>
         <img className={classes.image} 
-            src={`/Grocery/${grocery.imageUrl}`} alt={grocery.name}
+            src={`${grocery.imageUrl}`} alt={grocery.name}
         />
         <div className={classes.details}>
             <div className={classes.header}>
