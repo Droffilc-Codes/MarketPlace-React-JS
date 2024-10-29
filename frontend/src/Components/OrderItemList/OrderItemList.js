@@ -8,7 +8,8 @@ export default function OrderItemList({orders}) {
     <table className={classes.table}>
         <tbody>
             <tr>
-                <td colSpan="5">
+                {/* changed colspan to 6 from 5 */}
+                <td colSpan="6"> 
                     <h3>Order Items:</h3>
                 </td>
             </tr>
@@ -20,6 +21,8 @@ export default function OrderItemList({orders}) {
                         </Link>
                     </td>
                     <td>{item.grocery.name}</td>
+                    {/* added shop info */}
+                    <td>{item.grocery.shop}</td>
                     <td>
                         <Price price={item.grocery.price} />
                     </td>
@@ -29,7 +32,7 @@ export default function OrderItemList({orders}) {
             ) ) }
 
             <tr>
-                <td colSpan="3"></td>
+                <td colSpan="4"></td>
                 <td>
                     <strong>Total :</strong>
                 </td>

@@ -56,7 +56,7 @@ export default function BagProvider({children}) {
         setBagItems(filteredBagItems)
     }
 
-    // Checks changing Quantity
+    // Checks changing Quantity 
     const changedQuantity = (bagItem, newQuantity) =>{
         const { grocery } = bagItem
 
