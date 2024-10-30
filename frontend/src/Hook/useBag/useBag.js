@@ -1,5 +1,4 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-// import { sample_market_data } from '../../../../backend/src/data'
 import { getAll } from '../../Services/groceryServices'
 
 
@@ -10,8 +9,9 @@ const EMPTY_BAG = {
     items: [],
     totalPrice: 0,
     totalCount:0,
-    //
-    stock: 0
+    stock: 0,
+    delivery: 0,
+    subTotal: 0
 }
 
 export default function BagProvider({children}) {
@@ -22,23 +22,56 @@ export default function BagProvider({children}) {
     const [totalPrice, setTotalPrice] = useState(initBag.totalPrice)
     const [totalCount, setTotalCount] = useState(initBag.totalCount)
     const [stock, setStock] = useState()
+    const [delivery, setDelivery] = useState()
+    const [subTotal, setSubTotal] = useState()
+    
 
 
-    useEffect(()=>{
-        const totalPrice = sum(bagItems.map(item => item.price))
-        const totalCount = sum(bagItems.map(item =>(item.stock !== "out-Of-stock"? item.quantity: 0)))
+    useEffect(() => {
+        // Calculate the total price from bag items
+        const calculatedTotalPrice = sum(bagItems.map(item => item.price));
+        const calculatedTotalCount = sum(bagItems.map(item => item.stock !== "out-Of-stock" ? item.quantity : 0));
+        setTotalCount(calculatedTotalCount);
+    
+        let placeOne = 0;
+        let placeTwo = 0;
+        let longDistance = 5000;
+        let withinDistance = 3000;
+        let itemDeliveryLongDistance = 80
+        let itemDeliverywithinDistance = 40
+    
+        // Determine if delivery spans two locations
+        bagItems.forEach(item => {
+            if (item.grocery.location === "Mainland") placeOne = 1;
+            else if (item.grocery.location === "Island") placeTwo = 1;
+        });
         
-        setTotalPrice(totalPrice)
-        setTotalCount(totalCount)
-
-        //Try
-        getAll().then(groceryItem => setStock(groceryItem.stock))
-        //end Try
-
-
-        localStorage.setItem(BAG_KEY, JSON.stringify({items:bagItems, totalPrice, totalCount, stock /* reove stock*/}))
-
-    }, [bagItems, stock])
+        const isLongDistance = placeOne && placeTwo;
+    
+        if (isLongDistance) {
+            setDelivery(longDistance = longDistance + (calculatedTotalCount*itemDeliveryLongDistance));
+            setSubTotal(calculatedTotalPrice)
+            setTotalPrice(calculatedTotalPrice + longDistance ); 
+        } else {
+            setDelivery(withinDistance = withinDistance +  (calculatedTotalCount*itemDeliverywithinDistance));
+            setSubTotal(calculatedTotalPrice)
+            setTotalPrice(calculatedTotalPrice + withinDistance );
+        }
+    
+    
+        // Fetch stock data and update
+        getAll().then(groceryItems => setStock(groceryItems.stock));
+    
+        localStorage.setItem(BAG_KEY, JSON.stringify({
+            items: bagItems,
+            totalPrice: calculatedTotalPrice,
+            totalCount: calculatedTotalCount,
+            stock,
+            delivery,
+            subTotal,
+        }));
+    }, [bagItems, stock]);
+    
 
 
     function getBagFromLocalStorage(){
@@ -107,7 +140,7 @@ export default function BagProvider({children}) {
 
 // Reduce Item inStock - should be done
 
-  return <BagContext.Provider value={{bag:{items:bagItems, totalPrice, totalCount, stock}, removeFromBag, changedQuantity, addToBag, clearBag}}>
+  return <BagContext.Provider value={{bag:{items:bagItems, totalPrice, totalCount, stock, delivery, subTotal}, removeFromBag, changedQuantity, addToBag, clearBag}}>
     {children}
     </BagContext.Provider>
 }

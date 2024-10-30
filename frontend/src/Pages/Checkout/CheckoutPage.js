@@ -12,7 +12,6 @@ import Buttons from '../../Components/Buttons/Buttons'
 import Input from '../../Components/Input/Input'
 import OrderItemList from '../../Components/OrderItemList/OrderItemList'
 import Map from '../../Components/Map/Map'
-import { latLng } from 'leaflet'
 
 export default function CheckoutPage() {
     const { bag } = useBag()
@@ -20,8 +19,6 @@ export default function CheckoutPage() {
     const navigate = useNavigate()
 
     const [orders, setOrder] = useState({...bag})
-    
-    console.log(orders) // Check what is in the orders
 
     const {
         handleSubmit,
@@ -34,6 +31,8 @@ const submit = async data  => {
         toast.error("Please select your location on the Map")
         return
     }
+    //Check if any order is less than 0 in quantity
+    console.log(orders)
 
     await createOrder({...orders, name: data.name, address: data.address, phone: data.phone})
     navigate('/payment')

@@ -31,12 +31,12 @@ router.get('/tags', handler(async (req, res)=>{
         }
     ]).sort({ count: - 1})
 
-    const all = {
-        name: 'All',
-        count: await GroceryModel.countDocuments()
-    }
+    // const all = {
+    //     name: 'All',
+    //     count: await GroceryModel.countDocuments()
+    // }
 
-    tags.unshift(all)
+    // tags.unshift(all)
 
 
     res.send(tags)
@@ -92,6 +92,7 @@ router.get('/search/:searchTerm', handler(async (req, res)=>{
 
 router.get('/tags/:tags', handler(async (req, res)=>{
     const {tags} = req.params
+
     const groceries = await GroceryModel.find({ tags:  tags })
     res.send(groceries)
 }))

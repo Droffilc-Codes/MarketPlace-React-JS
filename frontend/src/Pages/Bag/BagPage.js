@@ -9,7 +9,7 @@ import NotFound from '../../Components/Not Found/NotFound'
 export default function BagPage() {
 
     const { bag, removeFromBag, changedQuantity } = useBag()
-
+    console.log(bag)
   return   <>
   <Title title="Your Bag" margin="1.5rem 0 0 2.5rem" />
 
@@ -32,7 +32,8 @@ export default function BagPage() {
                         </div>
 
                         <div>
-                            <input value={item.quantity} onChange={e => changedQuantity(item, Number(e.target.value))} />
+                            <input type='number' value={item.quantity} onChange={e => changedQuantity(item, Math.max(1, Number(e.target.value)))} />
+                            
                         </div>
 
                         <div>
@@ -55,17 +56,29 @@ export default function BagPage() {
                 <div>
                     <div className={classes.grocery_count}>{bag.totalCount}</div>
 
-                    <div className={classes.total_price}>
-                        <Price price={bag.totalPrice} />
-                    </div>
+                    <div className={classes.grocery_subtotal}> <Price price={bag.subTotal} /></div>
+
+                    <div className={classes.delivery}> <Price price={bag.delivery}/></div>
+
+                    <div className={classes.total_price}><Price price={bag.totalPrice} /></div>
                 </div>
                 <Link to="/checkout">Proceed to Checkout</Link>
             </div>
 
         </div>
+        
     )
     
     }
+     {/* Start */}
+     <div className={classes.Notes}>
+        <h5 className={classes.Notes_text}>
+            Note: Delivery fee is based on how far apart the points of purchase.
+            <p>Items bought only from one location, e.g. Island markets will be charged less <Price price={3000}/>  compared to those bought from shops in Island and Mainland  markets <Price price={5000}/>
+            </p>
+            <p>For each Item, we charge extra <Price price={80}/> or <Price price={40}/> depending on point of purchase</p>
+        </h5>  
+    </div>
 
   </>
   

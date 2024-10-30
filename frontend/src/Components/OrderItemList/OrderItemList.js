@@ -17,7 +17,7 @@ export default function OrderItemList({orders}) {
                 <tr key={item.grocery.id}>
                     <td>
                         <Link to={`/grocery/${item.grocery.id}`}>
-                            <img src={item.grocery.imageUrl} />
+                            <img src={item.grocery.imageUrl} alt={item.grocery.name} />
                         </Link>
                     </td>
                     <td>{item.grocery.name}</td>
@@ -30,7 +30,24 @@ export default function OrderItemList({orders}) {
                     <td><Price price={item.price} /></td>
                 </tr>
             ) ) }
-
+            <tr>
+                <td colSpan="4"></td>
+                <td>
+                    <strong>subtotal :</strong>
+                </td>
+                <td>
+                     <Price price={orders.subTotal}/>
+                </td>
+            </tr>
+            <tr>
+                <td colSpan="4"></td>
+                <td>
+                    <strong>Delivery fee :</strong>
+                </td>
+                <td>
+                     <Price price={orders.delivery}/>
+                </td>
+            </tr>
             <tr>
                 <td colSpan="4"></td>
                 <td>

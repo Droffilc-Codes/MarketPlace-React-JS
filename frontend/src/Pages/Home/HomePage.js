@@ -35,11 +35,9 @@ export default function HomePage() {
   const {groceries, tags} = state
   const {searchTerm, tag} = useParams()
 
-  // console.log(state)
   useEffect(()=>{
 
     getAllTags().then(tags => dispatch({type: 'TAGS_LOADED', payload: tags}))
-
     const loadGroceries = tag? getAllGroceriesByTag(tag) : searchTerm ? search(searchTerm) : getAll()
 
     loadGroceries.then(groceryStuffs => dispatch({type: 'GROCERIES LOADED', payload: groceryStuffs }))

@@ -113,6 +113,23 @@
     color: grey;
   }
   
+  .checkout .grocery_subtotal{
+    margin-bottom: 1.5rem
+  }
+  .checkout .grocery_subtotal::before{
+    content: 'Subtotal: ';
+    color: grey;
+  }
+
+.checkout .delivery{
+  margin-bottom: 1.5rem
+}
+.checkout .delivery::before{
+  content: 'Delivery: ';
+  color: grey;
+}
+
+
   .checkout a {
     padding: 1rem;
     color: white;
@@ -127,4 +144,15 @@
   .checkout a:hover {
     opacity: 0.8;
     cursor: pointer;
+  }
+
+  .Notes{
+    margin-left: 2rem;
+    
+  }
+
+  .Notes .Notes_text{
+    word-wrap: break-word;
+    font-size: 0.8rem;
+    font-weight: normal;
   }

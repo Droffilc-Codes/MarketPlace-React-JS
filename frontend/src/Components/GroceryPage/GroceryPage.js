@@ -30,6 +30,10 @@ export default function GroceryPage() {
             src={`${grocery.imageUrl}`} alt={grocery.name}
         />
         <div className={classes.details}>
+             {/* Add Shop Name */}
+             <div className={classes.location}>
+                <h4 className={classes.shop}>{grocery.location}, {grocery.shop}'s Shop</h4>
+             </div>
             <div className={classes.header}>
                 <span className={classes.name}>{grocery.name}</span>
                 <span className={`${classes.favourite} ${grocery.favourite ? '' : classes.not}`}>❤</span>

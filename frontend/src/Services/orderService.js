@@ -12,6 +12,7 @@ export const createOrder = async order =>{
 
 export const getNewOrderForCurrentUser = async () => {
     const { data } = await axios.get('/api/orders/newOrderForCurrentUser')
+    console.log(data)
     return data
 }
 

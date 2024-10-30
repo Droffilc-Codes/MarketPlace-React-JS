@@ -39,9 +39,11 @@ function TheCarousel ({market}){
 
     const theGoods = groceries.filter(item => item.location === market)
 
+
     return (
         <Carousel responsive={responsive}>
                 {    
+                
                             theGoods.map(goods => 
                         
                             <div key={goods.id}>
