@@ -6,6 +6,7 @@ import cors from 'cors'
 import groceryRouter from '../src/routers/grocery.router.js'
 import userRouter from '../src/routers/user.router.js'
 import orderRouter from '../src/routers/orders.router.js'
+import uploadRouter from '../src/routers/upload.router.js'
 
 import { dbconnect } from './Config/database.config.js'
 dbconnect()
@@ -21,6 +22,7 @@ app.use(cors({
 app.use('/api/groceries', groceryRouter)
 app.use('/api/users', userRouter)
 app.use('/api/orders', orderRouter)
+app.use('/api/upload', uploadRouter)
 
 const PORT = 5000
 

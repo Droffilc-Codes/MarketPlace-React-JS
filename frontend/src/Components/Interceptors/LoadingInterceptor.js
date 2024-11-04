@@ -3,7 +3,7 @@ import axios from "axios";
 export const setLoadingInterceptor = ({ showLoading, stopLoading}) => {
     axios.interceptors.request.use(
         req => {
-            showLoading()
+            if(!(req.data instanceof FormData)) showLoading()
             return req
         },
         error => {

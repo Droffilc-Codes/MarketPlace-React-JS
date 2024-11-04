@@ -11,6 +11,12 @@ import PaymentPage from './Pages/Payment/PaymentPage'
 import OrderTrackPage from './Pages/OrderTrack/OrderTrackPage'
 import ProfilePage from './Pages/Profile/ProfilePage'
 import OrdersPage from './Pages/Orders Page/OrdersPage'
+import Dashboard from './Pages/Dashboard/Dashboard'
+import GroceryAdminPage from './Pages/AdminPage/GroceryAdminPage'
+import AdminRoute from './Components/AdminRoute/AdminRoute'
+import GroceryEdit from './Pages/GroceryEdit/GroceryEdit'
+import UsersPage from './Pages/UsersPage/UsersPage'
+import UserEdit from './Pages/UserEdit/UserEdit'
 
 export default function AppRoutes() {
   return (
@@ -27,6 +33,11 @@ export default function AppRoutes() {
         <Route path="/track/:orderId" element ={<AuthRoute> <OrderTrackPage/> </AuthRoute>} />
         <Route path="/user-profile" element ={<AuthRoute> <ProfilePage/> </AuthRoute>} />
         <Route path="/orders/:filter?" element ={<AuthRoute> <OrdersPage/> </AuthRoute>} />
+        <Route path="/dashboard" element ={<AuthRoute> <Dashboard/> </AuthRoute>} />
+        <Route path="/admin/groceries/:searchTerm?" element ={<AdminRoute> <GroceryAdminPage/> </AdminRoute>} />
+        <Route path="/admin/users/:searchTerm?" element ={<AdminRoute> <UsersPage/> </AdminRoute>} />
+        <Route path="/admin/editUser/:userId?" element ={<AdminRoute> <UserEdit/> </AdminRoute>} />
+        {/* <Route path="/admin/editGrocery/:groceryId?" element ={<AdminRoute> <GroceryEdit/> </AdminRoute>} /> */}
     </Routes>
   )
 }

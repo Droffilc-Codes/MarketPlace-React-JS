@@ -37,3 +37,19 @@ export const stockUpdateResponse  = async orders => {
         throw error;
     }
 };
+
+
+export const deleteGroceryById = async groceryId =>{
+    await axios.delete('/api/groceries/' + groceryId)
+}
+
+//Update already existing grocery
+export const update = async (grocery) => {
+    await axios.put('/api/groceries/', grocery)
+}
+
+//Add new groceery item
+export const add = async (grocery) => {
+    const { data } = await axios.post('/api/groceries', grocery)
+    return data
+}

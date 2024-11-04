@@ -27,7 +27,7 @@ export default function Header() {
 
               <li className={classes.menu_container}>
                 
-                <Link to="/user-profile">{user.name}</Link>
+                <Link to="/dashboard">{user.name}</Link>
 
                 <div className={classes.menu}>
 

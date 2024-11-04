@@ -1,6 +1,7 @@
 import { Router } from 'express'
 import handler from 'express-async-handler'
 import { GroceryModel } from '../models/grocery.model.js'
+import admin from '../middleware/admin.mid.js'
 
 
 const router = Router()
@@ -9,6 +10,56 @@ router.get('/', handler(async (req, res)=>{
     const groceries = await GroceryModel.find({})
     res.send(groceries)
 }))
+
+
+router.post('/', admin, handler(async (req, res)=>{
+    const { name, price, stock, tags, location, market, imageUrl, shop, otherInformation} = req.body
+
+    const grocery = new GroceryModel({
+        name, 
+        price, 
+        stock, 
+        tags: tags.split? tags.split(',') : tags, 
+        location, 
+        market, 
+        imageUrl,
+        shop, 
+        otherInformation
+    })
+
+    await grocery.save()
+
+    res.send(grocery)
+}))
+
+
+router.put('/', admin, handler(async (req, res)=>{
+    const { id, name, price, stock, tags, location, market, imageUrl, shop, otherInformation} = req.body
+
+    await GroceryModel.updateOne({_id: id}, 
+        {
+            name, 
+            price, 
+            stock, 
+            tags: tags.split? tags.split(',') : tags, 
+            location, 
+            market, 
+            imageUrl,
+            shop, 
+            otherInformation
+        }
+    )
+    res.send()
+}))
+
+
+router.delete('/:groceryId', admin, handler(async (req, res)=>{
+    const { groceryId } = req.params
+
+    await GroceryModel.deleteOne({_id: groceryId})
+
+    res.send()
+}) )
 
 
 router.get('/tags', handler(async (req, res)=>{
@@ -42,7 +93,6 @@ router.get('/tags', handler(async (req, res)=>{
     res.send(tags)
 }))
 
-//Test stock redution start
 
 
 

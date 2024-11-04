@@ -8,6 +8,7 @@ export const UserSchema = new Schema(
         phone: {type: Number, required: true},
         address: {type: String, required: true},
         isAdmin: {type: Boolean, default: false},
+        isBlocked: {type: Boolean, default: false},
     },
     {
         timestamps: true,

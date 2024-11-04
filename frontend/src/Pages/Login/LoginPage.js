@@ -6,6 +6,7 @@ import classes from './LoginPage.module.css'
 import Title from '../../Components/Title/Title'
 import Input from '../../Components/Input/Input'
 import Buttons from '../../Components/Buttons/Buttons'
+import { EMAIL } from '../../constants/patterns'
 
 export default function LoginPage() {
     const {
@@ -39,10 +40,7 @@ export default function LoginPage() {
                     label="Email"
                     {...register('email',{
                         required: true,
-                        pattern:{
-                            value: /^[\w-.]+@([\w-]+\.)+[\w-]{2,63}$/i,
-                            message: 'Email is Not Valid'
-                        }
+                        pattern:EMAIL
                     })}
                     error={errors.email}
                 />
