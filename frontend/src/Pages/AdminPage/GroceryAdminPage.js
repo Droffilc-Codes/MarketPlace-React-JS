@@ -67,7 +67,6 @@ export default function GroceryAdminPage() {
                         margin="1rem 0"
                         placeholder='Search for Grocery'
                     />
-                    {/* <Link to={"/admin/addGrocery"} className={classes.add_grocery}> */}
                     <Link onClick={()=> toggleModal(null)} className={classes.add_grocery}>
                         Add Groceries +
                     </Link>
@@ -79,7 +78,6 @@ export default function GroceryAdminPage() {
                                     <Link to={'/grocery/'+ grocery.id}>{grocery.name}</Link>
                                     <Price price={grocery.price}/>
                                     <div className={classes.actions}>
-                                        {/* <Link to={'/admin/editGrocery/' + grocery.id}>Edit</Link> */}
                                         <Link onClick={()=>toggleModal(grocery)} >Edit</Link>
                                         <Link onClick={()=> deleteGrocery(grocery)}>Delete</Link>
                                     </div>
@@ -90,13 +88,7 @@ export default function GroceryAdminPage() {
                 </div>
             </div>
                     {modal && (
-                    //     <div className={classes.modal}>
-                    //         <div className={classes.modal_content}>
-                    //             This is a modal
-                    //             <h2>{`The Food has an ID: ${groceryID}`}</h2>
-                    //         </div>
-                    //         <button onClick={toggleModal}>Close</button>
-                    //  </div>
+            
                     <GroceryEdit groceryID={groceryID} toggle={toggleModal} />
                     )}
                         

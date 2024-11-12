@@ -17,6 +17,7 @@ import AdminRoute from './Components/AdminRoute/AdminRoute'
 import GroceryEdit from './Pages/GroceryEdit/GroceryEdit'
 import UsersPage from './Pages/UsersPage/UsersPage'
 import UserEdit from './Pages/UserEdit/UserEdit'
+import AdminStats from './Pages/AdminStats/AdminStats'
 
 export default function AppRoutes() {
   return (
@@ -37,6 +38,7 @@ export default function AppRoutes() {
         <Route path="/admin/groceries/:searchTerm?" element ={<AdminRoute> <GroceryAdminPage/> </AdminRoute>} />
         <Route path="/admin/users/:searchTerm?" element ={<AdminRoute> <UsersPage/> </AdminRoute>} />
         <Route path="/admin/editUser/:userId?" element ={<AdminRoute> <UserEdit/> </AdminRoute>} />
+        <Route path="/admin/stats" element ={<AdminRoute> <AdminStats/> </AdminRoute>} />
         {/* <Route path="/admin/editGrocery/:groceryId?" element ={<AdminRoute> <GroceryEdit/> </AdminRoute>} /> */}
     </Routes>
   )

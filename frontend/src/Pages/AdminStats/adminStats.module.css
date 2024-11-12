@@ -1,0 +1,62 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /* flex-wrap: wrap; */
+    margin: 3rem;
+}
+
+
+.content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    margin: 1rem;
+    max-width: 70rem;
+    width: 100%;
+    gap: 1rem;
+}
+
+.right_charts{
+    max-width: 25rem;
+    width: 100%;
+    margin: 2rem;
+    align-items: center;
+}
+
+.left_charts{
+    max-width: 25rem;
+    width: 100%;
+    margin: 2rem;
+    align-items: center;
+
+}
+
+.orderData{
+    margin-bottom: 2.5rem;
+}
+
+.revenue_info{
+    background-color: black;
+    box-shadow: 0 0 5px 1px;
+    color: whitesmoke;
+    padding: 1rem;
+    margin: 1rem;
+    margin-bottom: 5rem;
+}
+.revenue_info:hover{
+    box-shadow: 2px 2px 10px 1px grey;
+}
+.revenue_delivery{
+    background-color: black;
+    box-shadow: 0 0 5px 1px;
+    color: whitesmoke;
+    padding: 1rem;
+    margin: 1rem;
+    margin-top: 5rem;
+}
+.revenue_delivery:hover{
+    box-shadow: 2px 2px 10px 1px grey;
+}  
