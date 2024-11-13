@@ -18,6 +18,7 @@ import GroceryEdit from './Pages/GroceryEdit/GroceryEdit'
 import UsersPage from './Pages/UsersPage/UsersPage'
 import UserEdit from './Pages/UserEdit/UserEdit'
 import AdminStats from './Pages/AdminStats/AdminStats'
+import ShopAccounts from './Pages/Shop Accounts/ShopAccounts'
 
 export default function AppRoutes() {
   return (
@@ -39,7 +40,7 @@ export default function AppRoutes() {
         <Route path="/admin/users/:searchTerm?" element ={<AdminRoute> <UsersPage/> </AdminRoute>} />
         <Route path="/admin/editUser/:userId?" element ={<AdminRoute> <UserEdit/> </AdminRoute>} />
         <Route path="/admin/stats" element ={<AdminRoute> <AdminStats/> </AdminRoute>} />
-        {/* <Route path="/admin/editGrocery/:groceryId?" element ={<AdminRoute> <GroceryEdit/> </AdminRoute>} /> */}
+        <Route path="/admin/shops/:searchTerm?" element ={<AdminRoute> <ShopAccounts/> </AdminRoute>} />
     </Routes>
   )
 }

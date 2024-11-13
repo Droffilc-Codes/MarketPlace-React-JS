@@ -3,7 +3,7 @@ import { getAllOrders } from '../../Services/orderService';
 import { Bar, Line } from 'react-chartjs-2';
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend } from 'chart.js';
 import classes from './adminStats.module.css'
-import Input from '../../Components/Input/Input';
+
 
 // Register chart components
 ChartJS.register(CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend);

@@ -1,22 +1,21 @@
-// Sellers payment
-// Delivered or shipping area
-
 import React, { useEffect, useState } from 'react';
 import { getAllOrders } from '../../Services/orderService';
 import classes from './shopAccount.module.css'
 import Title from '../../Components/Title/Title';
 import Search from '../../Components/Search/Search';
 import { useParams } from 'react-router-dom';
+import NotFound from '../../Components/Not Found/NotFound';
+
 
 export default function ShopAccounts() {
     const [allOrders, setAllOrders] = useState([]);
     const [shopSales, setShopSales] = useState({});
-    const { searchTerm } = useParams()
+    const  { searchTerm } = useParams()
     
 
     useEffect(() => {
         loadOrders();
-    }, []);
+    }, [searchTerm]);
 
     const loadOrders = async () => {
         const getOrders = await getAllOrders();
@@ -26,27 +25,11 @@ export default function ShopAccounts() {
 
     const calculateShopSales = (orders) => {
         const sales = {};
-        //TEST
-        const edey = false
-        //    const getSomeOrder = 
-       orders.forEach(order => {
-            // Filter items belonging to the specified shop
-            if(edey){
-                const filteredItems = order.items.filter(item => {
-                    const shopName = item.grocery.shop;
-                    return shopName === "Mummy Israel";
-                });
-                console.log(filteredItems);
-            }else{
-                console.log("Do the next thing!!")
-            }
-        
-            // Log or process the filtered items as needed
-            
-        });
+       
         //
-
         orders.forEach(order => {
+            
+            
             order.items.forEach(item => {
                 const shopName = item.grocery.shop;
                 const totalAmount = item.price;
@@ -57,28 +40,55 @@ export default function ShopAccounts() {
                     sales[shopName] = totalAmount;
                 }
             });
+          
         });
+        
+        if(searchTerm){
 
-        setShopSales(sales);
+            const getOneShop =
+            Object.entries(sales)
+                    .filter(shop => {
+                return shop[0].includes(searchTerm) })
+            
+
+                if(getOneShop.length === 0){
+                    setShopSales(null)
+                }else{
+                    const shopBalance = {}
+                    shopBalance[getOneShop[0][0]] = getOneShop[0][1]
+                    setShopSales(shopBalance)
+                }
+        }else{
+            setShopSales(sales);
+        }
+
     };
+  
 
     return (
         <div className={classes.container}>
             <Title title="Shop Accounts"/>
+            
             <Search 
-                        searchRoute='/admin/shops/'
-                        defaultRoute='/admin/shops'
-                        margin="1rem 0"
-                        placeholder='Search for Seller'
+                placeholder = "Search for Shops"
+                searchRoute="/admin/shops/"
+                defaultRoute = "/admin/shops"
+                margin="1rem 0"
+            
             />
 
-            <ul>
+           {
+            shopSales ? (
+                <ul className={classes.salesList}>
                 {Object.entries(shopSales).map(([shopName, totalAmount]) => (
-                    <li key={shopName}>
-                        {shopName}: ₦{totalAmount?.toLocaleString()}
+                    <li key={shopName} className={classes.salesItem}>
+                        <span className={classes.shopName}>{shopName}</span>
+                         <span className={classes.totalAmount}>₦{totalAmount?.toLocaleString()}</span> 
                     </li>
                 ))}
             </ul>
+            ) : ( <NotFound  linkRoute='/admin/shops' linkText='Go Back To Sellers Account'/>)
+           }
         </div>
     );
 }
