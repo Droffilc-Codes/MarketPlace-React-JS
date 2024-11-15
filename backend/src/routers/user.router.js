@@ -117,9 +117,9 @@ router.get('/getUserById/:userId', admin, handler(async(req, res)=>{
 }))
 
 router.put('/updateUser', admin, handler(async (req, res)=>{
-    const { id, name, email, phone, address, isAdmin } = req.body
+    const { id, name, email, phone, address, isAdmin, isDeliveryAdmin } = req.body //isDeliveryAdmin added 11/13/24
 
-    await UserModel.findByIdAndUpdate(id, {name, email, phone, address, isAdmin})
+    await UserModel.findByIdAndUpdate(id, {name, email, phone, address, isAdmin, isDeliveryAdmin})
 
     res.send()
 }))

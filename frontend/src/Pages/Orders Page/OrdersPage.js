@@ -76,7 +76,8 @@ export default function OrdersPage() {
                 <div className={classes.header}>
                     <span>{order.id}</span>
                     <span>
-                        <DateTime date={order.createdAt}/>
+                        { filter === "SHIPPED"? (<DateTime date={order.updatedAt}/>) : 
+                        (<DateTime date={order.createdAt}/>)}
                     </span>
                     <span>
                         {order.status}

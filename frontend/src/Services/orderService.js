@@ -33,10 +33,17 @@ export const trackOrderById = async orderId =>{
 
 export const getAllOrders = async status => {
     const { data } = await axios.get(`/api/orders/${status ?? ''}`)
+    console.log(data)
     return data
 }
 
 export const getAllStatus = async () =>{
     const { data } = await axios.get('/api/orders/allStatus')
+    return data
+}
+
+//My own backend access
+export const changeOrderStatus = async orderId => {
+    const { data } = await axios.put('/api/orders/delivery', {orderId})
     return data
 }

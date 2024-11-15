@@ -62,6 +62,11 @@ export default function UserEdit() {
             {...register('isAdmin', )}
             error={errors.isAdmin}
             />
+            <Input label="Delivery Admin"
+            type="checkbox"
+            {...register('isDeliveryAdmin', )}
+            error={errors.isDeliveryAdmin}
+            />
 
             <Buttons type='submit' text={isEditMode ? 'submit' : 'create'}/>
 

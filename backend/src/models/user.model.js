@@ -9,6 +9,7 @@ export const UserSchema = new Schema(
         address: {type: String, required: true},
         isAdmin: {type: Boolean, default: false},
         isBlocked: {type: Boolean, default: false},
+        isDeliveryAdmin: {type: Boolean, default: false}, //Addition
     },
     {
         timestamps: true,

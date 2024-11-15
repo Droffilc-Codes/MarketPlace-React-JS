@@ -6,6 +6,8 @@ import { OrderModel } from "../models/order.model.js";
 import { OrderStatus } from "../constants/orderStatus.js";
 import { UserModel } from "../models/user.model.js";
 import { sendEmailReceipt } from "../helpers/mail.helper.js";
+//My own 13.11.24
+import admin from "../middleware/admin.mid.js";
 
 const router = Router()
 router.use(auth)
@@ -78,6 +80,21 @@ router.get('/allStatus', handler(async (req, res)=>{
     res.send(allStatus)
 }))
 
+//My Own 11/13.24
+router.put('/delivery', admin, handler(async (req, res)=>{
+    const  {orderId}  = req.body
+
+    if (!orderId) {
+        res.status(BAD_REQUEST).send('Order Not Found!')
+        return
+    }
+
+    const order = await OrderModel.findById(orderId)
+    order.status = OrderStatus.SHIPPED
+    await order.save()
+
+    res.send()
+}))
 
 
 router.get('/:status?', handler(async (req, res)=>{
