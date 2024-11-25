@@ -47,7 +47,7 @@ export default function DeliveryPage() {
    const delivered = async (orderId) => {
     await changeOrderStatus(orderId)
     toast.success(`Grocery with Order ID:${orderId} shipped successfully`, {
-        duration: 10000,
+        duration: 5000,
     })
     setOrderID(orderId)
    }

@@ -14,12 +14,14 @@ import OrdersPage from './Pages/Orders Page/OrdersPage'
 import Dashboard from './Pages/Dashboard/Dashboard'
 import GroceryAdminPage from './Pages/AdminPage/GroceryAdminPage'
 import AdminRoute from './Components/AdminRoute/AdminRoute'
-import GroceryEdit from './Pages/GroceryEdit/GroceryEdit'
+// import GroceryEdit from './Pages/GroceryEdit/GroceryEdit'
 import UsersPage from './Pages/UsersPage/UsersPage'
 import UserEdit from './Pages/UserEdit/UserEdit'
 import AdminStats from './Pages/AdminStats/AdminStats'
 import ShopAccounts from './Pages/Shop Accounts/ShopAccounts'
 import DeliveryPage from './Pages/DeliveryPage/DeliveryPage'
+import Accounts from './Pages/Accounts/Accounts'
+import ApprovePay from './Pages/AccountApproval/ApprovePay'
 
 export default function AppRoutes() {
   return (
@@ -43,6 +45,8 @@ export default function AppRoutes() {
         <Route path="/admin/stats" element ={<AdminRoute> <AdminStats/> </AdminRoute>} />
         <Route path="/admin/shops/:searchTerm?" element ={<AdminRoute> <ShopAccounts/> </AdminRoute>} />
         <Route path="/admin/delivery/:searchTerm?" element ={<AdminRoute> <DeliveryPage/> </AdminRoute>} />
+        <Route path="/admin/accounts/:searchTerm?" element ={<AdminRoute> <Accounts/> </AdminRoute>} />
+        <Route path="/admin/approve-pay" element={<AdminRoute> <ApprovePay /></AdminRoute>} />
     </Routes>
   )
 }

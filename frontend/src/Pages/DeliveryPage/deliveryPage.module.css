@@ -55,7 +55,7 @@
     display: flex;
 }
 
-input[type="checkbox"] {
+.deliver_box input[type="checkbox"] {
     cursor: pointer;
     width: 20px;
     height: 20px;
@@ -63,7 +63,7 @@ input[type="checkbox"] {
     transition: transform 0.2s ease;
 }
 
-input[type="checkbox"]:hover {
+.deliver_box input[type="checkbox"]:hover {
     transform: scale(1.1);
 }
 

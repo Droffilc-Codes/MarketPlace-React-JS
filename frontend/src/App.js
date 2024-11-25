@@ -21,3 +21,12 @@ function App() {
 }
 
 export default App;
+
+ /* 
+ // Work on the shop sellers account - message for account update for the day----done
+ // Work on the css and display of sellers account ----done
+ // Work on the payment approval
+ // Work on the Admin dashboard
+ // Work on admin who can get access to accounts and delivery page
+ // Work the 
+ */
