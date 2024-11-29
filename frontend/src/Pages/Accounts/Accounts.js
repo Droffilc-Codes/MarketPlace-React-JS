@@ -8,125 +8,102 @@ import NotFound from '../../Components/Not Found/NotFound';
 import { recordPayment } from '../../Services/accountService';
 
 export default function ShopAccounts() {
-  const [allOrders, setAllOrders] = useState([]);
   const [shopSales, setShopSales] = useState({});
   const { searchTerm } = useParams();
+
   const [theDate, setTheDate] = useState(() => {
     const today = new Date();
     today.setDate(today.getDate() - 1); // Set to yesterday's date
+    today.setUTCHours(0, 0, 0, 0); // Normalize to start of day
     return today;
   });
-  const [noData, setNoData] = useState(false); // State for account data
-  const [denyUpdate, setDenyUpdate] = useState(false)
+  const [noData, setNoData] = useState(false);
+
+  // Helper to normalize a given date
+  const normalizeDate = (date) => {
+    const normalized = new Date(date);
+    normalized.setUTCHours(0, 0, 0, 0); // Reset to midnight
+    return normalized;
+  };
 
   const getSelectedDate = (date) => {
-    // Ensure that only previous day's accounts are posted
-    const UpDate = new Date(date)
-    const today = new Date()
-    UpDate.setHours(1, 0, 0, 0)
-    today.setHours(1,0,0,0)
-
-      if(UpDate.getTime() === today.getTime()){
-
-        const previousDate = new Date(UpDate)
-        previousDate.setDate(previousDate.getDate()-1)
-        setTheDate(previousDate)
-        setDenyUpdate(true)
-      }else{
-        setTheDate(UpDate);
-        setDenyUpdate(false)
-      }
+    if(!date){
+      setNoData(true)
+    }else{
+      const normalizedDate = normalizeDate(date);
+      setTheDate(normalizedDate);
+    }
   };
-  console.log(theDate)
 
-  
+
   useEffect(() => {
-
     loadOrders();
-
-  }, [searchTerm, theDate, denyUpdate]);
-
-
+  }, [searchTerm, theDate]);
 
   const loadOrders = async () => {
     const getOrders = await getAllOrders();
-    setAllOrders(getOrders);
     calculateShopSales(getOrders);
   };
- 
+
   const calculateShopSales = (orders) => {
-    
-        const sales = {};
-      
-            
-        const filterOrders = orders.filter((item) => {
-          const isShippedAndPayed = item.status === 'SHIPPED';
-          return isShippedAndPayed; // Return all items that match the criteria
-        });
+    const sales = {};
 
-        const month = theDate.getMonth();
-        const selectedYear = theDate.getFullYear();
-        const day = theDate.getDate();
+    // Filter shipped orders
+    const filterOrders = orders.filter((item) => item.status === 'SHIPPED');
 
-        const secondTest = filterOrders.filter((item) => {
-          const orderDate = new Date(item.updatedAt); // Will decide if it is shipped items or paid for
-          const isCurrentMonth =
-            orderDate.getMonth() === month &&
-            orderDate.getFullYear() === selectedYear &&
-            orderDate.getDate() === day;
+    // Filter orders by selected date
+    const secondFilter = filterOrders.filter((item) => {
+      const orderDate = new Date(item.updatedAt);
+      orderDate.setUTCHours(0, 0, 0, 0); // Normalize order date
+      return orderDate.getTime() === theDate.getTime();
+    });
 
-          return isCurrentMonth; // Return all items that match the date
-        });
+    secondFilter.forEach((order) => {
+      order.items.forEach((item) => {
+        const shopName = item.grocery.shop;
+        const totalAmount = item.price * 0.9;
 
-        secondTest.forEach((order) => {
-          order.items.forEach((item) => {
-            const shopName = item.grocery.shop;
-            const totalAmount = item.price * 0.9;
-
-            if (sales[shopName]) {
-              sales[shopName] += totalAmount;
-            } else {
-              sales[shopName] = totalAmount;
-            }
-            sales.date = theDate
-
-          });
-        });
-
-      
-        
-        const sendPay = async (sales) => {
-          if (!sales || Object.keys(sales || {}).length === 0 || denyUpdate){
-            setNoData(true);
-            
-          } 
-            else{
-              setNoData(false);
-              await recordPayment(sales);
-            }
-        }
-        
-        sendPay(sales)
-        console.log(sales)
-
-
-        if (searchTerm) {
-          const getOneShop = Object.entries(sales).filter((shop) => {
-            return shop[0].includes(searchTerm);
-          });
-
-          if (getOneShop.length === 0) {
-            setShopSales(null);
-          } else {
-            const shopBalance = {};
-            shopBalance[getOneShop[0][0]] = getOneShop[0][1];
-            setShopSales(shopBalance);
-          }
+        if (sales[shopName]) {
+          sales[shopName] += totalAmount;
         } else {
-        
-            setShopSales(sales);
-          
+          sales[shopName] = totalAmount;
         }
+      });
+    });
+
+    sales.date = theDate.toISOString().split('T')[0]; // Format date as "YYYY-MM-DD"
+
+    // Send payment data to backend
+    const sendPay = async (sales) => {
+      if (!sales || Object.keys(sales).length <= 1) {
+        setNoData(true);
+        console.log("EMPTY!")
+      } else {
+        setNoData(false);
+        console.log("FULL")
+        await recordPayment(sales);
+      }
+    };
+
+    sendPay(sales);
+
+    console.log('Sales Data:', sales);
+
+    if (searchTerm) {
+      const getOneShop = Object.entries(sales).filter((shop) => {
+        return shop[0].includes(searchTerm);
+      });
+
+      if (getOneShop.length === 0) {
+        setShopSales(null);
+      } else {
+        const shopBalance = {};
+        shopBalance[getOneShop[0][0]] = getOneShop[0][1];
+        setShopSales(shopBalance);
+      }
+    } else {
+      setShopSales(sales);
+    }
   };
 
   return (
@@ -151,53 +128,34 @@ export default function ShopAccounts() {
         />
       </div>
 
-      
-      {denyUpdate ? (
-
-      <div className={classes.warning}>
-        
-        Business Day has not ended! Accounts of today will be updated tomorrow 
-        
-        <NotFound
-                linkRoute="/admin/accounts"
-                linkText="Go Back To Account"
-        />
-      </div>
-      ) : (noData && <h3 className={classes.warning}>No Payment to Sellers on this Date!</h3> )
-      
+      {
+        noData && (
+          <h3 className={classes.warning}>
+            No Payment to Sellers on this Date!
+          </h3>
+        )
       }
 
       {shopSales ? (
         <ul className={classes.salesList}>
-          {
-
-          Object.entries(shopSales).filter(item => item[0] !== "date").map(([shopName, totalAmount]) => (
-            <li key={shopName} className={classes.salesItem}>
-              <form >
-
-                    <span className={classes.shopName}>
-                      <h3>
-                        {shopName}
-                      </h3>
-                    </span>
-
-                    <span className={classes.totalAmount}> 
-                      <h3>
-                           ₦{totalAmount?.toLocaleString()}
-                      </h3> 
-                    </span>
-               
-              </form>
-            </li>
-          ))}
-        </ul> ) : (
-                <NotFound
-                linkRoute="/admin/accounts"
-                linkText="Go Back To Account"
-                />
-            )}
-
-      
+          {Object.entries(shopSales)
+            .filter((item) => item[0] !== 'date')
+            .map(([shopName, totalAmount]) => (
+              <li key={shopName} className={classes.salesItem}>
+                <form>
+                  <span className={classes.shopName}>
+                    <h3>{shopName}</h3>
+                  </span>
+                  <span className={classes.totalAmount}>
+                    <h3>₦{totalAmount?.toLocaleString()}</h3>
+                  </span>
+                </form>
+              </li>
+            ))}
+        </ul>
+      ) : (
+        <NotFound linkRoute="/admin/accounts" linkText="Go Back To Account" />
+      )}
     </div>
   );
 }
