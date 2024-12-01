@@ -22,6 +22,9 @@ import ShopAccounts from './Pages/Shop Accounts/ShopAccounts'
 import DeliveryPage from './Pages/DeliveryPage/DeliveryPage'
 import Accounts from './Pages/Accounts/Accounts'
 import ApprovePay from './Pages/AccountApproval/ApprovePay'
+import DeliveryAdminRoute from './Components/DeliveryAdminRoute/DeliveryAdminRoute'
+import AccountAdminRoute from './Components/AccountAdminRoute/AccountAdminRoute'
+import DataAdminRoute from './Components/DataControlRoute/DataControlAdminRoute'
 
 export default function AppRoutes() {
   return (
@@ -39,14 +42,14 @@ export default function AppRoutes() {
         <Route path="/user-profile" element ={<AuthRoute> <ProfilePage/> </AuthRoute>} />
         <Route path="/orders/:filter?" element ={<AuthRoute> <OrdersPage/> </AuthRoute>} />
         <Route path="/dashboard" element ={<AuthRoute> <Dashboard/> </AuthRoute>} />
-        <Route path="/admin/groceries/:searchTerm?" element ={<AdminRoute> <GroceryAdminPage/> </AdminRoute>} />
-        <Route path="/admin/users/:searchTerm?" element ={<AdminRoute> <UsersPage/> </AdminRoute>} />
-        <Route path="/admin/editUser/:userId?" element ={<AdminRoute> <UserEdit/> </AdminRoute>} />
+        <Route path="/admin/groceries/:searchTerm?" element ={<DataAdminRoute> <GroceryAdminPage/> </DataAdminRoute>} />
+        <Route path="/admin/users/:searchTerm?" element ={<DataAdminRoute> <UsersPage/> </DataAdminRoute>} />
+        <Route path="/admin/editUser/:userId?" element ={<DataAdminRoute> <UserEdit/> </DataAdminRoute>} />
         <Route path="/admin/stats" element ={<AdminRoute> <AdminStats/> </AdminRoute>} />
         <Route path="/admin/shops/:searchTerm?" element ={<AdminRoute> <ShopAccounts/> </AdminRoute>} />
-        <Route path="/admin/delivery/:searchTerm?" element ={<AdminRoute> <DeliveryPage/> </AdminRoute>} />
-        <Route path="/admin/accounts/:searchTerm?" element ={<AdminRoute> <Accounts/> </AdminRoute>} />
-        <Route path="/admin/approve-pay" element={<AdminRoute> <ApprovePay /></AdminRoute>} />
+        <Route path="/admin/delivery/:searchTerm?" element ={<DeliveryAdminRoute> <DeliveryPage/> </DeliveryAdminRoute>} />
+        <Route path="/admin/accounts/:searchTerm?" element ={<AccountAdminRoute> <Accounts/> </AccountAdminRoute>} />
+        <Route path="/admin/approve-pay" element={<AccountAdminRoute> <ApprovePay /></AccountAdminRoute>} />
     </Routes>
   )
 }

@@ -117,9 +117,9 @@ router.get('/getUserById/:userId', admin, handler(async(req, res)=>{
 }))
 
 router.put('/updateUser', admin, handler(async (req, res)=>{
-    const { id, name, email, phone, address, isAdmin, isDeliveryAdmin } = req.body //isDeliveryAdmin added 11/13/24
+    const { id, name, email, phone, address, isAdmin, isDeliveryAdmin, isAccountsAdmin, isDataAdmin } = req.body //isDeliveryAdmin added 11/13/24
 
-    await UserModel.findByIdAndUpdate(id, {name, email, phone, address, isAdmin, isDeliveryAdmin})
+    await UserModel.findByIdAndUpdate(id, {name, email, phone, address, isAdmin, isDeliveryAdmin, isAccountsAdmin, isDataAdmin})
 
     res.send()
 }))
@@ -130,7 +130,10 @@ const generateTokenResponse = user => {
     const token = jwt.sign({
         id: user.id, 
         email: user.email, 
-        isAdmin: user.isAdmin
+        isAdmin: user.isAdmin,
+        isDeliveryAdmin: user.isDeliveryAdmin,
+        isAccountsAdmin: user.isAccountsAdmin, 
+        isDataAdmin: user.isDataAdmin,
     }, process.env.JWT_SECRET,
     {
         expiresIn: '30d',
@@ -144,8 +147,10 @@ const generateTokenResponse = user => {
         address: user.address,
         phone: user.phone,
         isAdmin: user.isAdmin,
+        isDeliveryAdmin: user.isDeliveryAdmin, // addition
+        isAccountsAdmin: user.isAccountsAdmin, // addition
+        isDataAdmin: user.isDataAdmin, // addition
         token,
-
     }
 }
 

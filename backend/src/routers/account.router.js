@@ -3,11 +3,12 @@ import handler from 'express-async-handler'
 import { AccountModel } from "../models/account.model.js";
 import admin from "../middleware/admin.mid.js";
 import { BAD_REQUEST } from "../constants/httpStatus.js";
+import accountAdmin from "../middleware/accountAdmin.mid.js";
 
 
 const router = Router()
 
-router.post('/createPayment', admin, handler(async(req, res)=>{
+router.post('/createPayment', accountAdmin, handler(async(req, res)=>{
     console.log('Route hit:', req.body);
     const { shopName, totalAmount, date} = req.body
     try{

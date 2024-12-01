@@ -48,7 +48,7 @@ export default function ApprovePay() {
       console.log(payment_id)
       await updateShopPayments(payment_id)
       toast.success("Seller's payment has been approved", {
-        duration: 5000,
+        duration: 3000,
       })
       setPaymentId(payment_id)
       setIsChecked(e.target.checked)

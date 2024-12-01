@@ -10,6 +10,10 @@ export const UserSchema = new Schema(
         isAdmin: {type: Boolean, default: false},
         isBlocked: {type: Boolean, default: false},
         isDeliveryAdmin: {type: Boolean, default: false}, //Addition
+        isAccountsAdmin: {type: Boolean, default: false}, //Addition
+        isDataAdmin: {type: Boolean, default: false}, //Addition
+
+
     },
     {
         timestamps: true,

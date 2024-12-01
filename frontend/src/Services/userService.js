@@ -5,6 +5,7 @@ export const getUser = () =>
 
 export const login = async (email, password) =>{
     const { data } = await axios.post('api/users/login', { email, password })
+    console.log(data)
     localStorage.setItem('user', JSON.stringify(data))
     return data 
 }

@@ -8,6 +8,7 @@ import { UserModel } from "../models/user.model.js";
 import { sendEmailReceipt } from "../helpers/mail.helper.js";
 //My own 13.11.24
 import admin from "../middleware/admin.mid.js";
+import deliveryAdmin from "../middleware/deliveryAdmin.mid.js";
 
 const router = Router()
 router.use(auth)
@@ -80,8 +81,8 @@ router.get('/allStatus', handler(async (req, res)=>{
     res.send(allStatus)
 }))
 
-//My Own 11/13.24
-router.put('/delivery', admin, handler(async (req, res)=>{
+//My Own 11/13.24 new removing admin middleware replaced with deliveryAdmin
+router.put('/delivery', deliveryAdmin, handler(async (req, res)=>{
     const  {orderId}  = req.body
 
     if (!orderId) {

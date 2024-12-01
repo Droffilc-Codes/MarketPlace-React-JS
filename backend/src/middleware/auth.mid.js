@@ -13,6 +13,7 @@ export default (req, res, next) =>{
         const decoded = verify(token, process.env.JWT_SECRET)
         req.user = decoded
 
+
     }catch(error){
         res.status(USER_UNAUTHORISED).send()
 

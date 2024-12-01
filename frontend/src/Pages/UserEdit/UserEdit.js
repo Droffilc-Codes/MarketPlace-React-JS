@@ -68,6 +68,18 @@ export default function UserEdit() {
             error={errors.isDeliveryAdmin}
             />
 
+            {/* Add for Accounts and Add for Data control */}
+            <Input label="Accounts Admin"
+            type="checkbox"
+            {...register('isAccountsAdmin', )}
+            error={errors.isAccountsAdmin}
+            />
+            <Input label="Data Admin"
+            type="checkbox"
+            {...register('isDataAdmin', )}
+            error={errors.isDataAdmin}
+            />
+
             <Buttons type='submit' text={isEditMode ? 'submit' : 'create'}/>
 
         </form>
